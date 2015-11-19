@@ -5,6 +5,7 @@
 <link rel="import" href="../neon-animation/neon-animations.html">
 <link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../paper-spinner/paper-spinner.html">
 <!--
 `cbn-help` allows you to use an [ace editor](http://ace.c9.io/) as an element.
 ### Usage
@@ -20,24 +21,45 @@
 		:host {
 			display: block;
 		}
+		paper-spinner.loading-spinner{
+			--paper-spinner-layer-1-color: var(--default-primary-color);
+			--paper-spinner-layer-2-color: var(--default-primary-color);
+			--paper-spinner-layer-3-color: var(--default-primary-color);
+			--paper-spinner-layer-4-color: var(--default-primary-color);
+			vertical-align: middle;
+			padding: 3px;
+			height:24px;
+			width:24px;
+			box-sizing: border-box;
+		}
+		[hidden]{
+			display: none !important;
+		}
 	</style>
 
 	<template>
-		<paper-button class="account" on-tap="toggleHelp" id="help">
+		<paper-button style="min-width:initial" on-tap="open" id="help">
 			<iron-icon icon="help"></iron-icon>
 		</paper-button>
 		<paper-dialog id="dialogHelp" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal style="width: 400px;text-align:left">
-			<p class="header-dialog">Help</p>
-			<paper-textarea label="Mesaj" style="margin-top:0px" value="{{textHelp}}" max-rows="6"></paper-textarea>
+			<p class="header-dialog">{{label}}</p>
+			<paper-textarea label="Mesaj" style="margin-top:0" value="{{textHelp}}" max-rows="6"></paper-textarea>
 			<div class="buttons">
-				<paper-button dialog-dismiss>Anuleaza</paper-button>
-				<paper-button dialog-confirm autofocus on-tap="_sendHelp">Trimite</paper-button>
+				<paper-button dialog-dismiss>
+					<iron-icon icon="icons:close"></iron-icon>
+					<span>Anuleaza</span>
+				</paper-button>
+				<paper-button on-tap="_sendHelp">
+					<iron-icon icon="icons:check" hidden$="[[loading]]"></iron-icon>
+					<paper-spinner active="[[loading]]" hidden$="[[!loading]]" class="loading-spinner"></paper-spinner>
+					<span>Trimite</span>
+				</paper-button>
 			</div>
 		</paper-dialog>
 		<iron-ajax id="saveHelp" 
 				   loading="{{loading}}" 
 				   url="/salveaza/Feedback" 
-				   params="{{paramsHelp}}" 
+				   params="[[params]]" 
 				   on-response="_savedHelp" 
 				   handleAs="json" 
 				   method="POST"
@@ -56,48 +78,55 @@
 					value:false,
 					notify:true,
 					readOnly:true
+				},
+				type:{
+					type: String,
+					value:"help"
+				},
+				label:{
+					type:String,
+					value:"Help"
+				},
+				params: {
+					type: Object,
+					value: function () {
+						return {};
+					}
 				}
 			},
-			ready: function() {
-			},
-			attached: function() {
-			},
-			toggleHelp: function () {
+			open: function () {
 				this.$.dialogHelp.open();
+			},
+			close: function () {
+				this.$.dialogHelp.close();
 			},
 			_sendHelp: function () {
 				this.$.saveHelp.body = {
-					"type": "help",
+					"type": this.type,
 					"rezolutie": this._calcRezolutie(),
 					"content": this.textHelp
 				};
 				this.$.saveHelp.generateRequest();
 			},
 			_savedHelp: function () {
+				this.textHelp = "";
+				this.close();
 				this.fire("cbn-message", {
 					type: "success",
 					message: "Mesajul a fost salvat."
 				});
 			},
 			_calcRezolutie: function () {
-				var screenWidth,
-					screenHeight,
-					windowWidth,
-					windowHeight,
-					colorDepth,
-					pixelDepth;
-
-				screenWidth = screen.width;
-				screenHeight = screen.height;
-				windowWidth = window.innerWidth;
-				windowHeight = window.innerHeight;
-				colorDepth = screen.colorDepth;
-				pixelDepth = screen.pixelDepth;
-				var rezolutie = "Screen: " + screenWidth + "x" + screenHeight + " ";
-				rezolutie += "Window: " + windowWidth + "x" + windowHeight + " ";
-				rezolutie += "ColorDepth: " + colorDepth + " ";
-				rezolutie += "PixelDepth: " + pixelDepth;
-				return rezolutie;
+				var screenWidth = screen.width;
+				var screenHeight = screen.height;
+				var windowWidth = window.innerWidth;
+				var windowHeight = window.innerHeight;
+				var colorDepth = screen.colorDepth;
+				var pixelDepth = screen.pixelDepth;
+				return "Screen: " + screenWidth + "x" + screenHeight + " "
+					+ "Window: " + windowWidth + "x" + windowHeight + " "
+					+ "ColorDepth: " + colorDepth + " "
+					+ "PixelDepth: " + pixelDepth;
 			}
 		});
 	})();
