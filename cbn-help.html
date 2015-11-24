@@ -100,9 +100,17 @@
 					}
 				}
 			},
-			open: function () {
+			ready:function(){
+				this.listen(this.$.dialogHelp, "neon-animation-finish", "_focusTextarea");
+			},
+			open: function (event) {
+				event.preventDefault();
+				
 				this.$.dialogHelp.open();
-				this.$.textarea.$.input.$.textarea.focus()
+				var that=this;
+			},
+			_focusTextarea:function(){
+				this.$.textarea.$.input.$.textarea.focus();
 			},
 			close: function () {
 				this.$.dialogHelp.close();
