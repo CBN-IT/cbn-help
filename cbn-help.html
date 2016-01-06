@@ -6,6 +6,7 @@
 <link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="../paper-spinner/paper-spinner.html">
+<link rel="import" href="../paper-tooltip/paper-tooltip.html">
 <!--
 `cbn-help` allows you to use an [ace editor](http://ace.c9.io/) as an element.
 ### Usage
@@ -47,18 +48,19 @@
 		<paper-button style="min-width:initial" on-tap="open" id="help">
 			<iron-icon icon="help"></iron-icon>
 		</paper-button>
+		<paper-tooltip for="help">Help</paper-tooltip>
 		<paper-dialog id="dialogHelp" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal style="width: 400px;text-align:left">
 			<p class="header-dialog">{{label}}</p>
-			<paper-textarea id="textarea" label="Mesaj" style="margin-top:0" value="{{textHelp}}" max-rows="6"></paper-textarea>
+			<paper-textarea id="textarea" label="Message" style="margin-top:0" value="{{textHelp}}" max-rows="6"></paper-textarea>
 			<div class="buttons">
 				<paper-button dialog-dismiss id="dismiss">
 					<iron-icon icon="icons:close"></iron-icon>
-					<span>Anuleaza</span>
+					<span>Cancel</span>
 				</paper-button>
 				<paper-button on-tap="_sendHelp" id="accept">
 					<iron-icon icon="icons:check" hidden$="[[loading]]"></iron-icon>
 					<paper-spinner active="[[loading]]" hidden$="[[!loading]]" class="loading-spinner"></paper-spinner>
-					<span>Trimite</span>
+					<span>Send</span>
 				</paper-button>
 			</div>
 		</paper-dialog>
