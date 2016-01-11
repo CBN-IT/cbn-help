@@ -106,9 +106,9 @@
 			},
 			open: function (event) {
 				event.preventDefault();
-				
+				this.screenShotText = this.makePrintScreen();
+				this.rezolutie = this._calcRezolutie();
 				this.$.dialogHelp.open();
-				var that=this;
 			},
 			_focusTextarea:function(){
 				this.$.textarea.$.input.$.textarea.focus();
@@ -119,9 +119,9 @@
 			_sendHelp: function () {
 				this.$.saveHelp.body = {
 					"type": this.type,
-					"rezolutie": this._calcRezolutie(),
+					"rezolutie": this.rezolutie,
 					"content": this.textHelp,
-					"html": this.makePrintScreen()
+					"html": this.screenShotText
 				};
 				this.$.saveHelp.generateRequest();
 			},
