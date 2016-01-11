@@ -42,6 +42,14 @@
 		#dismiss {
 			color: var(--google-red-500);
 		}
+		#accept:hover {
+			background-color: var(--paper-green-100);
+		}
+
+		#dismiss:hover {
+			background-color: var(--paper-green-100);
+		}
+
 	</style>
 
 	<template>
@@ -50,8 +58,8 @@
 				<span style="position:absolute; top:3px; left:3px;right:3px; bottom:3px; background-color: red; border-radius: 50%;">&nbsp;</span>
 				<iron-icon icon="help"></iron-icon>
 			</span>
+			<cbn-tooltip>Help</cbn-tooltip>
 		</paper-button>
-		<cbn-tooltip for="help">Help</cbn-tooltip>
 		<paper-dialog id="dialogHelp" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal style="width: 400px;text-align:left">
 			<p class="header-dialog">{{label}}</p>
 			<paper-textarea id="textarea" label="Message" style="margin-top:0" value="{{textHelp}}" max-rows="6"></paper-textarea>
