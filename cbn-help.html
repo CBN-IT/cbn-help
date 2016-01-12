@@ -54,11 +54,12 @@
 
 	<template>
 		<paper-button style="min-width:initial" on-tap="open" id="help">
+			Ajutor
 			<span style="display:inline-block;position: relative;">
 				<span style="position:absolute; top:3px; left:3px;right:3px; bottom:3px; background-color: red; border-radius: 50%;">&nbsp;</span>
 				<iron-icon icon="help"></iron-icon>
 			</span>
-			<cbn-tooltip>Help</cbn-tooltip>
+			<cbn-tooltip position="bottom left, top left">Ajutor</cbn-tooltip>
 		</paper-button>
 		<paper-dialog id="dialogHelp" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal style="width: 400px;text-align:left">
 			<p class="header-dialog">{{label}}</p>
