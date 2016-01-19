@@ -2,6 +2,17 @@
     "name": "cbn-help",
     "version": "1.0.0",
     "private": true,
+    "ignore": [
+        "**/.*",
+        "resources/*.zip",
+        "test",
+        "demo",
+        "node_modules",
+        "bower_components",
+        "Gruntfile.js",
+        "package.json",
+        "src"
+    ],
     "dependencies": {
         "polymer": "Polymer/polymer#^1.2",
         "iron-icon": "PolymerElements/iron-icon#^1.0",
