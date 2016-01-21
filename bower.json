@@ -23,7 +23,7 @@
         "paper-dialog":"PolymerElements/paper-dialog#^1.0",
         "neon-animation":"PolymerElements/neon-animation#^1.0",
         "paper-spinner":"PolymerElements/paper-spinner#^1.0",
-        "paper-tooltip": "PolymerElements/paper-tooltip#^1.0.0"
+        "cbn-tooltip": "git@bitbucket.org:cbn-it/cbn-tooltip#master"
     },
     "devDependencies": {
         "web-component-tester": "Polymer/web-component-tester",
