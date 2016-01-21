@@ -20,35 +20,55 @@
 		:host {
 			display: block;
 		}
-		paper-spinner.loading-spinner{
-			--paper-spinner-layer-1-color: var(--google-green-500);
-			--paper-spinner-layer-2-color: var(--google-green-500);
-			--paper-spinner-layer-3-color: var(--google-green-500);
-			--paper-spinner-layer-4-color: var(--google-green-500);
-			vertical-align: middle;
-			padding: 3px;
-			height:24px;
-			width:24px;
-			box-sizing: border-box;
-		}
 		[hidden]{
 			display: none !important;
 		}
-
-		#accept {
-			color: var(--google-green-500);
+		.icon-btn {
+			background-color: #4285f4;
+			color: #fff;
+			min-width: 0;
+			padding: 0 5px 0 5px;
+			margin: 0;
+			height: 26px;
+			overflow: hidden;
 		}
 
-		#dismiss {
-			color: var(--google-red-500);
-		}
-		#accept:hover {
-			background-color: var(--paper-green-100);
+		.icon-btn > .icon-btn-text {
+			margin-right: 5px;
 		}
 
-		#dismiss:hover {
-			background-color: var(--paper-green-100);
+		.icon-btn > .icon-btn-icon {
+			width: 20px;
+			height: 20px;
+			margin: 3px 0;
 		}
+
+		.icon-btn > .icon-btn-spinner {
+			--paper-spinner-layer-1-color: white;
+			--paper-spinner-layer-2-color: white;
+			--paper-spinner-layer-3-color: white;
+			--paper-spinner-layer-4-color: white;
+			--paper-spinner-color: white;
+			height: 16px;
+			width: 16px;
+			margin: 5px 2px;
+		}
+		.icon-btn.red {
+			background-color: var(--google-red-500);
+		}
+
+		.icon-btn.red:hover {
+			background-color: var(--paper-red-900);
+		}
+
+		.icon-btn.green {
+			background-color: var(--google-green-500);
+		}
+
+		.icon-btn.green:hover {
+			background-color: var(--paper-green-900);
+		}
+		
 		paper-button{
 			text-transform: none;
 		}
@@ -62,20 +82,20 @@
 				<span style="position:absolute; top:3px; left:3px;right:3px; bottom:3px; background-color: red; border-radius: 50%;">&nbsp;</span>
 				<iron-icon icon="help"></iron-icon>
 			</span>
-			<cbn-tooltip position="bottom left, top left">Ajutor</cbn-tooltip>
+			<cbn-tooltip position="bottom center, top center">Ajutor</cbn-tooltip>
 		</paper-button>
 		<paper-dialog id="dialogHelp" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal style="width: 400px;text-align:left">
 			<p class="header-dialog">{{label}}</p>
 			<paper-textarea id="textarea" label="Message" style="margin-top:0" value="{{textHelp}}" max-rows="6"></paper-textarea>
 			<div class="buttons">
-				<paper-button dialog-dismiss id="dismiss">
-					<iron-icon icon="icons:close"></iron-icon>
-					<span>Cancel</span>
+				<paper-button dialog-dismiss id="dismiss" class="icon-btn red" style="margin-right: 16px;">
+					<iron-icon icon="icons:close" class="icon-btn-spinner"></iron-icon>
+					<span class="icon-btn-text">Cancel</span>
 				</paper-button>
-				<paper-button on-tap="_sendHelp" id="accept">
-					<iron-icon icon="icons:check" hidden$="[[loading]]"></iron-icon>
-					<paper-spinner active="[[loading]]" hidden$="[[!loading]]" class="loading-spinner"></paper-spinner>
-					<span>Send</span>
+				<paper-button on-tap="_sendHelp" class="icon-btn green" style="margin-right: 16px;">
+					<iron-icon icon="icons:check" hidden$="[[loading]]" class="icon-btn-icon"></iron-icon>
+					<paper-spinner active="[[loading]]" hidden$="[[!loading]]" class="icon-btn-spinner"></paper-spinner>
+					<span class="icon-btn-text">Send</span>
 				</paper-button>
 			</div>
 		</paper-dialog>
@@ -193,6 +213,9 @@
 
 			for (var i in scripts) {
 				if (!scripts.hasOwnProperty(i)) {
+					continue;
+				}
+				if(scripts[i].import==null){
 					continue;
 				}
 				var script = scripts[i].import.documentElement;
