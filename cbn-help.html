@@ -5,7 +5,7 @@
 <link rel="import" href="../neon-animation/neon-animations.html">
 <link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
-<link rel="import" href="../paper-spinner/paper-spinner.html">
+<link rel="import" href="../paper-spinner/paper-spinner-lite.html">
 <link rel="import" href="../cbn-tooltip/cbn-tooltip.html">
 <!--
 `cbn-help` allows you to use an [ace editor](http://ace.c9.io/) as an element.
@@ -52,6 +52,7 @@
 			height: 16px;
 			width: 16px;
 			margin: 5px 2px;
+			vertical-align: middle;
 		}
 		.icon-btn.red {
 			background-color: var(--google-red-500);
@@ -94,7 +95,7 @@
 				</paper-button>
 				<paper-button on-tap="_sendHelp" class="icon-btn green" style="margin-right: 16px;">
 					<iron-icon icon="icons:check" hidden$="[[loading]]" class="icon-btn-icon"></iron-icon>
-					<paper-spinner active="[[loading]]" hidden$="[[!loading]]" class="icon-btn-spinner"></paper-spinner>
+					<paper-spinner-lite active="[[loading]]" hidden$="[[!loading]]" class="icon-btn-spinner"></paper-spinner-lite>
 					<span class="icon-btn-text">Send</span>
 				</paper-button>
 			</div>
