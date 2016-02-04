@@ -85,9 +85,9 @@
 			</span>
 			<cbn-tooltip position="bottom center, top center">Ajutor</cbn-tooltip>
 		</paper-button>
-		<paper-dialog id="dialogHelp" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal style="width: 400px;text-align:left">
+		<paper-dialog id="dialogHelp" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal style="text-align:left">
 			<p class="header-dialog">{{label}}</p>
-			<paper-textarea id="textarea" label="Message" style="margin-top:0" value="{{textHelp}}" max-rows="6"></paper-textarea>
+			<paper-textarea id="textarea" label="Message" style="margin-top:0; width:700px;" value="{{textHelp}}" max-rows="10" rows="4"></paper-textarea>
 			<div class="buttons">
 				<paper-button dialog-dismiss id="dismiss" class="icon-btn red" style="margin-right: 16px;">
 					<iron-icon icon="icons:close" class="icon-btn-spinner"></iron-icon>
