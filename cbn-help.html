@@ -140,6 +140,10 @@
 			ready:function(){
 				this.listen(this.$.dialogHelp, "neon-animation-finish", "_focusTextarea");
 			},
+			attached:function(){
+				//move the paper-dialog into body directly
+				document.body.appendChild(this.$.dialogHelp);
+			},
 			open: function (event) {
 				event.preventDefault();
 				this.screenShotText = this.makePrintScreen();
