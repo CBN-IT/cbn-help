@@ -73,7 +73,9 @@
 		paper-button{
 			text-transform: none;
 		}
-
+		#backdrop:not([opened]){
+			display: none;
+		}
 	</style>
 
 	<template>
@@ -85,11 +87,11 @@
 			</span>
 			<cbn-tooltip position="bottom center, top center">Ajutor</cbn-tooltip>
 		</paper-button>
-		<paper-dialog id="dialogHelp" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal style="text-align:left">
+		<paper-dialog id="dialogHelp" entry-animation="scale-up-animation" exit-animation="fade-out-animation" style="text-align:left" on-iron-overlay-canceled="close">
 			<p class="header-dialog">{{label}}</p>
 			<paper-textarea id="textarea" label="Message" style="margin-top:0; width:700px;" value="{{textHelp}}" max-rows="10" rows="4"></paper-textarea>
 			<div class="buttons">
-				<paper-button dialog-dismiss id="dismiss" class="icon-btn red" style="margin-right: 16px;">
+				<paper-button on-tap="close" id="dismiss" class="icon-btn red" style="margin-right: 16px;">
 					<iron-icon icon="icons:close" class="icon-btn-spinner"></iron-icon>
 					<span class="icon-btn-text">Cancel</span>
 				</paper-button>
@@ -100,6 +102,7 @@
 				</paper-button>
 			</div>
 		</paper-dialog>
+		<iron-overlay-backdrop id="backdrop"></iron-overlay-backdrop>
 		<iron-ajax id="saveHelp" 
 				   loading="{{loading}}" 
 				   url="/salveaza/Feedback" 
@@ -140,23 +143,24 @@
 			ready:function(){
 				this.listen(this.$.dialogHelp, "neon-animation-finish", "_focusTextarea");
 			},
-			attached:function(){
-				//move the paper-dialog into body directly
-				document.body.appendChild(this.$.dialogHelp);
-			},
 			open: function (event) {
 				event.preventDefault();
 				this.screenShotText = this.makePrintScreen();
 				this.rezolutie = this._calcRezolutie();
 				this.$.dialogHelp.open();
+				this.$.backdrop.open();
 			},
 			_focusTextarea:function(){
 				this.$.textarea.$.input.$.textarea.focus();
 			},
 			close: function () {
 				this.$.dialogHelp.close();
+				this.$.backdrop.close();
 			},
 			_sendHelp: function () {
+				if(this.textHelp==undefined || this.textHelp.length<=3){
+					return;
+				}
 				this.$.saveHelp.body = {
 					"type": this.type,
 					"rezolutie": this.rezolutie,
