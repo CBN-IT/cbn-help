@@ -1,33 +1,33 @@
 {
-    "name": "cbn-help",
-    "version": "1.0.0",
-    "private": true,
-    "ignore": [
-        "**/.*",
-        "resources/*.zip",
-        "test",
-        "demo",
-        "node_modules",
-        "bower_components",
-        "Gruntfile.js",
-        "package.json",
-        "src"
-    ],
-    "dependencies": {
-        "polymer": "Polymer/polymer#1.3.1",
-        "iron-icon": "PolymerElements/iron-icon#1.0.8",
-        "iron-icons": "PolymerElements/iron-icons#1.1.3",
-        "paper-input": "PolymerElements/paper-input#1.1.9",
-        "iron-ajax": "PolymerElements/iron-ajax#1.2.0",
-        "paper-button": "PolymerElements/paper-button#1.0.11",
-        "paper-dialog": "PolymerElements/paper-dialog#1.0.4",
-        "neon-animation": "PolymerElements/neon-animation#1.1.1",
-        "paper-spinner": "PolymerElements/paper-spinner#1.1.1",
-        "cbn-tooltip": "git@bitbucket.org:cbn-it/cbn-tooltip#master"
-    },
-    "devDependencies": {
-        "web-component-tester": "Polymer/web-component-tester",
-        "iron-component-page": "PolymerElements/iron-component-page#^1.0",
-        "test-fixture": "PolymerElements/test-fixture#^1.0"
-    }
+  "name": "cbn-help",
+  "version": "1.0.0",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "resources/*.zip",
+    "test",
+    "demo",
+    "node_modules",
+    "bower_components",
+    "Gruntfile.js",
+    "package.json",
+    "src"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#1.6.0",
+    "iron-icon": "PolymerElements/iron-icon#1.0.8",
+    "iron-icons": "PolymerElements/iron-icons#1.1.3",
+    "paper-input": "PolymerElements/paper-input#1.1.14",
+    "iron-ajax": "PolymerElements/iron-ajax#1.2.1",
+    "paper-button": "PolymerElements/paper-button#1.0.12",
+    "paper-dialog": "PolymerElements/paper-dialog#1.0.4",
+    "neon-animation": "PolymerElements/neon-animation#1.2.3",
+    "paper-spinner": "PolymerElements/paper-spinner#1.2.0",
+    "cbn-tooltip": "CBN-IT/cbn-tooltip#master"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester",
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0",
+    "test-fixture": "PolymerElements/test-fixture#^1.0"
+  }
 }
