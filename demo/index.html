@@ -16,24 +16,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	<link rel="import" href="../cbn-help.html">
 	<link rel="import" href="../../paper-spinner/paper-spinner.html">
 
+	<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+	<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+
 	<style>
-		html,body{
-			margin:0;
-			padding:0;
+		html, body {
+			margin: 0;
+			padding: 0;
 		}
+
 		body {
 			position: absolute;
-			top:0;
-			bottom:0;
-			left:0;
-			right:0;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
 		}
 	</style>
 </head>
-<body>
-	<template id="first" is="dom-bind">
-		<cbn-help loading="{{loading}}"></cbn-help>
-		<paper-spinner active="{{loading}}"></paper-spinner>
-	</template>
+	<body>
+		<demo-snippet class="centered-demo" style="position:relative">
+			<template id="first" is="dom-bind">
+				<cbn-help loading="{{loading}}"></cbn-help>
+				<paper-spinner active="{{loading}}"></paper-spinner>
+			</template>
+		</demo-snippet>
 	</body>
 </html>
