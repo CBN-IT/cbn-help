@@ -23,7 +23,8 @@
     "paper-dialog": "PolymerElements/paper-dialog#1.0.4",
     "neon-animation": "PolymerElements/neon-animation#1.2.3",
     "paper-spinner": "PolymerElements/paper-spinner#1.2.0",
-    "cbn-tooltip": "CBN-IT/cbn-tooltip#master"
+    "cbn-tooltip": "CBN-IT/cbn-tooltip#master", 
+    "cbn-grid": "CBN-IT/cbn-grid#master"
     
   },
   "devDependencies": {
