@@ -97,6 +97,7 @@
 				}
 			},
 			ready:function(){
+				this.listen(document,"cbn-help","_saveBug");
 				//TODO: listen for resize event and call .refit() so the dialog goes back on the center of the screen 
 				this.listen(this.$.dialogHelp, "neon-animation-finish", "_focusTextarea");
 			},
@@ -107,6 +108,12 @@
 				this.$.dialogHelp.refit();
 				this.$.dialogHelp.open();
 				this.$.backdrop.open();
+			},
+			_saveBug: function(event){
+				this.screenShotText = this.makePrintScreen();
+				this.rezolutie = this._calcRezolutie();
+				this.textHelp = event.detail["message"];
+				this._sendHelp();
 			},
 			_focusTextarea:function(){
 				this.$.textarea.$.input.$.textarea.focus();
