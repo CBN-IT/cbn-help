@@ -151,6 +151,10 @@
 			ready:function(){
 				//TODO: listen for resize event and call .refit() so the dialog goes back on the center of the screen 
 				this.listen(this.$.dialogHelp, "neon-animation-finish", "_focusTextarea");
+				this.$.dialogHelp._focusedChild = {
+					focus: function () {},
+					blur: function () {}
+				}
 			},
 			open: function (event) {
 				event.preventDefault();
