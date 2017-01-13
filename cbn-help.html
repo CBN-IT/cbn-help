@@ -7,6 +7,7 @@
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="../paper-spinner/paper-spinner-lite.html">
 <link rel="import" href="../cbn-tooltip/cbn-tooltip.html">
+<link rel="import" href="../cbn-grid/cbn-btn-styles.html">
 <!--
 `cbn-help` allows you to use an [ace editor](http://ace.c9.io/) as an element.
 ### Usage
@@ -20,59 +21,6 @@
 		:host {
 			display: block;
 		}
-		[hidden]{
-			display: none !important;
-		}
-		.icon-btn {
-			background-color: #4285f4;
-			color: #fff;
-			min-width: 0;
-			padding: 0 5px 0 5px;
-			margin: 0;
-			height: 26px;
-			overflow: hidden;
-		}
-
-		.icon-btn > .icon-btn-text {
-			margin-right: 5px;
-		}
-
-		.icon-btn > .icon-btn-icon {
-			width: 20px;
-			height: 20px;
-			margin: 3px 0;
-		}
-
-		.icon-btn > .icon-btn-spinner {
-			--paper-spinner-layer-1-color: white;
-			--paper-spinner-layer-2-color: white;
-			--paper-spinner-layer-3-color: white;
-			--paper-spinner-layer-4-color: white;
-			--paper-spinner-color: white;
-			height: 16px;
-			width: 16px;
-			margin: 5px 2px;
-			vertical-align: middle;
-		}
-		.icon-btn.red {
-			background-color: var(--google-red-500);
-		}
-
-		.icon-btn.red:hover {
-			background-color: var(--paper-red-900);
-		}
-
-		.icon-btn.green {
-			background-color: var(--google-green-500);
-		}
-
-		.icon-btn.green:hover {
-			background-color: var(--paper-green-900);
-		}
-		
-		paper-button{
-			text-transform: none;
-		}
 		#backdrop{
 			z-index: 100;
 			--iron-overlay-backdrop-opacity: 0.4;
@@ -85,7 +33,7 @@
 			width: 100%;
 		}
 	</style>
-
+	<style include="cbn-btn-styles"></style>
 	<template>
 		<paper-button style="min-width:initial" on-tap="open" id="help">
 			Ajutor
@@ -99,11 +47,11 @@
 			<p class="header-dialog">{{label}}</p>
 			<paper-textarea id="textarea" label="Message" style="margin-top:0; width:100%;box-sizing: border-box;" value="{{textHelp}}" max-rows="10" rows="4"></paper-textarea>
 			<div class="buttons">
-				<paper-button on-tap="close" id="dismiss" class="icon-btn red" style="margin-right: 16px;">
+				<paper-button on-tap="close" id="dismiss" class="icon-btn color red" style="margin-right: 16px;">
 					<iron-icon icon="icons:close" class="icon-btn-spinner"></iron-icon>
 					<span class="icon-btn-text">Cancel</span>
 				</paper-button>
-				<paper-button on-tap="_sendHelp" class="icon-btn green" style="margin-right: 16px;">
+				<paper-button on-tap="_sendHelp" class="icon-btn background green" style="margin-right: 16px;">
 					<iron-icon icon="icons:check" hidden$="[[loading]]" class="icon-btn-icon"></iron-icon>
 					<paper-spinner-lite active="[[loading]]" hidden$="[[!loading]]" class="icon-btn-spinner"></paper-spinner-lite>
 					<span class="icon-btn-text">Send</span>
@@ -149,6 +97,7 @@
 				}
 			},
 			ready:function(){
+				this.listen(document,"cbn-help","_saveBug");
 				//TODO: listen for resize event and call .refit() so the dialog goes back on the center of the screen 
 				this.listen(this.$.dialogHelp, "neon-animation-finish", "_focusTextarea");
 				this.$.dialogHelp._focusedChild = {
@@ -163,6 +112,12 @@
 				this.$.dialogHelp.refit();
 				this.$.dialogHelp.open();
 				this.$.backdrop.open();
+			},
+			_saveBug: function(event){
+				this.screenShotText = this.makePrintScreen();
+				this.rezolutie = this._calcRezolutie();
+				this.textHelp = event.detail["message"];
+				this._sendHelp();
 			},
 			_focusTextarea:function(){
 				this.$.textarea.$.input.$.textarea.focus();
