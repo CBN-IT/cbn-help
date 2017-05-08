@@ -4,6 +4,7 @@
 <link rel="import" href="../paper-dialog/paper-dialog.html">
 <link rel="import" href="../neon-animation/neon-animations.html">
 <link rel="import" href="../paper-input/paper-textarea.html">
+<link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="../paper-spinner/paper-spinner-lite.html">
 <link rel="import" href="../cbn-tooltip/cbn-tooltip.html">
@@ -48,6 +49,7 @@
 		</paper-button>
 		<paper-dialog id="dialogHelp" entry-animation="scale-up-animation" exit-animation="fade-out-animation" style="text-align:left" on-iron-overlay-canceled="close">
 			<p class="header-dialog">{{label}}</p>
+			<paper-input id="subject" label="Subject"  style="margin-top:0; width:70%;box-sizing: border-box;" value="{{subjectHelp}}"></paper-input>
 			<paper-textarea id="textarea" label="Message" style="margin-top:0; width:100%;box-sizing: border-box;" value="{{textHelp}}" max-rows="10" rows="4"></paper-textarea>
 			<div class="buttons">
 				<paper-button on-tap="close" id="dismiss" class="icon-btn background red" style="margin-right: 16px;">
@@ -117,9 +119,12 @@
 				this.$.backdrop.open();
 			},
 			_saveBug: function(event){
+				console.log(event.detail);
+				console.log(event);
 				this.screenShotText = this.makePrintScreen();
 				this.rezolutie = this._calcRezolutie();
 				this.textHelp = event.detail["message"];
+				this.subjectHelp = event.detail["subject"];
 				this._sendHelp();
 			},
 			_focusTextarea:function(){
@@ -137,6 +142,7 @@
 					"type": this.type,
 					"rezolutie": this.rezolutie,
 					"content": this.textHelp,
+					"subject": this.subjectHelp,
 					"html": this.screenShotText
 				};
 				this.$.saveHelp.generateRequest();
@@ -161,6 +167,7 @@
 			},
 			_savedHelp: function () {
 				this.textHelp = "";
+				this.subjectHelp = "";
 				this.close();
 				this.fire("cbn-message", {
 					type: "success",
