@@ -49,7 +49,6 @@
 		</paper-button>
 		<paper-dialog id="dialogHelp" entry-animation="scale-up-animation" exit-animation="fade-out-animation" style="text-align:left" on-iron-overlay-canceled="close">
 			<p class="header-dialog">{{label}}</p>
-			<paper-input id="subject" label="Subject"  style="margin-top:0; width:70%;box-sizing: border-box;" value="{{subjectHelp}}"></paper-input>
 			<paper-textarea id="textarea" label="Message" style="margin-top:0; width:100%;box-sizing: border-box;" value="{{textHelp}}" max-rows="10" rows="4"></paper-textarea>
 			<div class="buttons">
 				<paper-button on-tap="close" id="dismiss" class="icon-btn background red" style="margin-right: 16px;">
