@@ -1,0 +1,87 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-input/paper-textarea.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
+
+<dom-module id="cbn-help">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            paper-dialog {
+                max-width: 700px;
+                width: 100%;
+            }
+        </style>
+        <paper-icon-button icon="help" on-click="openDialog"></paper-icon-button>
+        <paper-dialog id="dialog" modal>
+            <h2>Help</h2>
+            <paper-textarea rows="5" label="Message" value="{{textHelp}}"></paper-textarea>
+            <div class="buttons">
+                <paper-button dialog-dismiss>Cancel</paper-button>
+                <paper-button autofocus on-click="sendHelp">Send</paper-button>
+            </div>
+        </paper-dialog>
+        <iron-ajax id="saveHelp"
+                   url="/salveaza/Feedback"
+                   params="[[params]]"
+                   on-response="savedHelp"
+                   handleAs="json"
+                   method="POST"
+                   content-type="application/x-www-form-urlencoded"
+        ></iron-ajax>
+    </template>
+
+    <script>
+        /**
+         * `cbn-help`
+         *
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class CbnHelp extends Polymer.Element {
+            static get is() {
+                return 'cbn-help';
+            }
+
+            static get properties() {
+                return {
+                    textHelp: {
+                        type: String
+                    }
+                };
+            }
+
+            openDialog() {
+                this.textHelp = "";
+                this.$.dialog.open();
+            }
+
+            sendHelp() {
+                if (this.textHelp == undefined || this.textHelp.length <= 3) {
+                    return;
+                }
+                this.$.saveHelp.body = {
+                    "type": "help",
+                    "content": this.textHelp
+                };
+                this.$.saveHelp.generateRequest();
+            }
+
+            savedHelp() {
+                this.$.dialog.close();
+                this.fire("cbn-message", {type: "success", text: "Mesajul a fost salvat."});
+            }
+        }
+
+        window.customElements.define(CbnHelp.is, CbnHelp);
+    </script>
+</dom-module>
