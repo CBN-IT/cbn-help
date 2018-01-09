@@ -3,6 +3,7 @@
 <link rel="import" href="../paper-dialog/paper-dialog.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-input/paper-textarea.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="../cbn-btn-styles/cbn-btn-styles.html">
@@ -25,8 +26,14 @@
             <h2>Help</h2>
             <paper-textarea rows="5" label="Message" value="{{textHelp}}"></paper-textarea>
             <div class="buttons">
-                <paper-button dialog-dismiss class="icon-btn red background">Cancel</paper-button>
-                <paper-button autofocus class="icon-btn green background" on-click="sendHelp">Send</paper-button>
+                <paper-button dialog-dismiss class="icon-btn red background">
+                    <iron-icon icon="close"></iron-icon>
+                    <span>Cancel</span>
+                </paper-button>
+                <paper-button autofocus class="icon-btn green background" on-click="sendHelp">
+                    <iron-icon icon="check"></iron-icon>
+                    <span>Send</span>
+                </paper-button>
             </div>
         </paper-dialog>
         <iron-ajax id="saveHelp"
