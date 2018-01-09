@@ -22,9 +22,9 @@
             }
         </style>
         <paper-icon-button icon="help" on-click="openDialog"></paper-icon-button>
-        <paper-dialog id="dialog">
+        <paper-dialog id="dialog" on-iron-overlay-opened="focusTextArea">
             <h2>Help</h2>
-            <paper-textarea rows="5" label="Message" value="{{textHelp}}"></paper-textarea>
+            <paper-textarea id="textarea" rows="5" label="Message" value="{{textHelp}}"></paper-textarea>
             <div class="buttons">
                 <paper-button dialog-dismiss class="icon-btn red background margin">
                     <iron-icon icon="close"></iron-icon>
@@ -71,6 +71,10 @@
             openDialog() {
                 this.textHelp = "";
                 this.$.dialog.open();
+            }
+
+            focusTextArea(){
+                this.$.textarea.shadowRoot.querySelector("iron-autogrow-textarea").shadowRoot.querySelector("textarea").focus();
             }
 
             sendHelp() {
