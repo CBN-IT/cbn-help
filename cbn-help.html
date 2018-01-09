@@ -75,6 +75,11 @@
 
             sendHelp() {
                 if (this.textHelp == undefined || this.textHelp.length <= 3) {
+                    this.dispatchEvent(new CustomEvent('cbn-message', {
+                        bubbles: true,
+                        composed: true,
+                        detail: {"text": "Completati mesajul", "error": true}
+                    }));
                     return;
                 }
                 this.$.saveHelp.body = {
@@ -86,7 +91,11 @@
 
             savedHelp() {
                 this.$.dialog.close();
-                this.fire("cbn-message", {type: "success", text: "Mesajul a fost salvat."});
+                this.dispatchEvent(new CustomEvent('cbn-message', {
+                    bubbles: true,
+                    composed: true,
+                    detail: {"text": "Mesajul a fost salvat"}
+                }));
             }
         }
 
