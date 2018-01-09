@@ -5,11 +5,12 @@
 <link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../cbn-btn-styles/cbn-btn-styles.html">
 
 
 <dom-module id="cbn-help">
     <template>
-        <style>
+        <style include="cbn-btn-styles">
             :host {
                 display: block;
             }
@@ -24,8 +25,8 @@
             <h2>Help</h2>
             <paper-textarea rows="5" label="Message" value="{{textHelp}}"></paper-textarea>
             <div class="buttons">
-                <paper-button dialog-dismiss>Cancel</paper-button>
-                <paper-button autofocus on-click="sendHelp">Send</paper-button>
+                <paper-button dialog-dismiss class="icon-btn red background">Cancel</paper-button>
+                <paper-button autofocus class="icon-btn green background" on-click="sendHelp">Send</paper-button>
             </div>
         </paper-dialog>
         <iron-ajax id="saveHelp"
