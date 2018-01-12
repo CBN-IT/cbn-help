@@ -23,16 +23,16 @@
         </style>
         <paper-icon-button icon="help" on-click="openDialog"></paper-icon-button>
         <paper-dialog id="dialog" on-iron-overlay-opened="focusTextArea">
-            <h2>Help</h2>
-            <paper-textarea id="textarea" rows="5" label="Message" value="{{textHelp}}"></paper-textarea>
+            <h2>{{i18n.help}}</h2>
+            <paper-textarea id="textarea" rows="5" label="{{i18n.message}}" value="{{textHelp}}"></paper-textarea>
             <div class="buttons">
                 <paper-button dialog-dismiss class="icon-btn red background margin">
                     <iron-icon icon="close"></iron-icon>
-                    <span>Cancel</span>
+                    <span>{{i18n.cancel}}</span>
                 </paper-button>
                 <paper-button autofocus class="icon-btn green background margin" on-click="sendHelp">
                     <iron-icon icon="check"></iron-icon>
-                    <span>Send</span>
+                    <span>{{i18n.send}}</span>
                 </paper-button>
             </div>
         </paper-dialog>
@@ -64,6 +64,26 @@
                 return {
                     textHelp: {
                         type: String
+                    },
+                    i18n: {
+                        type: Object,
+                        value: function () {
+                            if (window.i18n != undefined) {
+                                return {
+                                    "cancel": window.i18n["cancel"],
+                                    "send": window.i18n["send"],
+                                    "help": window.i18n["help"],
+                                    "message": window.i18n["message"],
+                                }
+                            } else {
+                                return {
+                                    "cancel": "Cancel",
+                                    "send": "Send",
+                                    "help": "Help",
+                                    "message": "Message"
+                                }
+                            }
+                        }
                     }
                 };
             }
@@ -73,7 +93,7 @@
                 this.$.dialog.open();
             }
 
-            focusTextArea(){
+            focusTextArea() {
                 this.$.textarea.shadowRoot.querySelector("iron-autogrow-textarea").shadowRoot.querySelector("textarea").focus();
             }
 
