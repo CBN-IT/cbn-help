@@ -1,7 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../paper-dialog/paper-dialog.html">
-<link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
@@ -21,19 +19,21 @@
                 width: 100%;
             }
         </style>
-        <paper-icon-button icon="help" on-click="openDialog"></paper-icon-button>
+        <button class="icon-btn big-btn ripple btn-trigger" on-click="openDialog">
+            <iron-icon icon="help"></iron-icon>
+        </button>
         <paper-dialog id="dialog" on-iron-overlay-opened="focusTextArea">
             <h2>{{i18n.help}}</h2>
             <paper-textarea id="textarea" rows="5" label="{{i18n.message}}" value="{{textHelp}}"></paper-textarea>
             <div class="buttons">
-                <paper-button dialog-dismiss class="icon-btn red background margin">
+                <button dialog-dismiss class="icon-btn red background margin">
                     <iron-icon icon="close"></iron-icon>
                     <span>{{i18n.cancel}}</span>
-                </paper-button>
-                <paper-button autofocus class="icon-btn green background margin" on-click="sendHelp">
+                </button>
+                <button autofocus class="icon-btn green background margin" on-click="sendHelp">
                     <iron-icon icon="check"></iron-icon>
                     <span>{{i18n.send}}</span>
-                </paper-button>
+                </button>
             </div>
         </paper-dialog>
         <iron-ajax id="saveHelp"
