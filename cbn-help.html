@@ -120,6 +120,10 @@
                     composed: true,
                     detail: {"text": "Mesajul a fost salvat"}
                 }));
+                this.dispatchEvent(new CustomEvent('saved-help', {
+                    bubbles: true,
+                    composed: true
+                }));
             }
         }
 
