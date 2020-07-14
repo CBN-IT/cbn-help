@@ -38,7 +38,6 @@
         </paper-dialog>
         <iron-ajax id="saveHelp"
                    url="/save/SaveFeedback"
-                   params="[[params]]"
                    on-response="savedHelp"
                    handleAs="json"
                    method="POST"
@@ -65,8 +64,8 @@
                     textHelp: {
                         type: String
                     },
-                    params: {
-                        type: Array
+                    namespace: {
+                        type: String
                     },
                     i18n: {
                         type: Object,
@@ -112,6 +111,9 @@
                 this.$.saveHelp.body = {
                     "type": "help",
                     "content": this.textHelp
+                };
+                this.$.saveHelp.params = {
+                    "namespace": this.namespace || ""
                 };
                 this.$.saveHelp.generateRequest();
             }
