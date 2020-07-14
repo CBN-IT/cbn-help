@@ -65,10 +65,13 @@
                     textHelp: {
                         type: String
                     },
+                    params: {
+                        type: Array
+                    },
                     i18n: {
                         type: Object,
                         value: function () {
-                            if (window.i18n != undefined) {
+                            if (window.i18n !== undefined) {
                                 return {
                                     "cancel": window.i18n["cancel"],
                                     "send": window.i18n["send"],
